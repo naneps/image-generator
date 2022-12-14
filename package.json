@@ -1,7 +1,7 @@
 {
   "name": "image-generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "Image generator for fun ",
   "main": "index.js",
   "devDependencies": {
     "nodemon": "^2.0.7"
