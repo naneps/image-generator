@@ -37,7 +37,7 @@
           />
           
         </div>
-        <Button label="Submit" />
+        <Button label="Submit" @click="signIn" />
       </div>
       <div class="relative flex-1">
         <img
@@ -49,17 +49,52 @@
     </form>
   </main>
 </template>
-<script>
+<script setup>
 import Button from "../../components/Button.vue";
 import Input from "../../components/Input.vue";
+import {ref } from "vue";
+import { initializeApp } from 'firebase/app'
+import { GoogleAuthProvider, GithubAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
+import firebaseConfig from '../../firebaseConfig'
+import { useAuth } from '@vueuse/firebase/useAuth'
 
-export default {
-  components: { Input, Button  },
-  name: "Auth",
-  data() {
-    return {
-      showPassword: false,
-    };
-  },
-};
+const showPassword = ref(false);
+// export this to use in the template
+
+const app = initializeApp(firebaseConfig)
+const { isAuthenticated, user } = useAuth(getAuth(app))
+
+const signIn = () => {
+  const provider = new GithubAuthProvider()
+  const auth = getAuth()
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+      const credential = GithubAuthProvider.credentialFromResult(result)
+      const token = credential.accessToken
+
+      // The signed-in user info.
+      const user = result.user
+      console.log(user)
+      // ...
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code
+      const errorMessage = error.message
+      // The email of the user's account used.
+      const email = error.email
+      // The AuthCredential type that was used.
+      const credential = GithubAuthProvider.credentialFromError(error)
+      // ...
+    })
+}
+
+// const auth = getAuth()
+
+// Your web app's Firebase configuration
+// const app = initializeApp(firebaseConfig)
+
+
+
+
 </script>
