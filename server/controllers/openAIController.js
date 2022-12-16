@@ -6,6 +6,8 @@ const AI = new OpenAIApi(config);
 
 
 const generateImage = async (req, res) => {
+    console.log('generateImage')
+    console.log(req.body)
     const {prompt, size} = req.body;
     const sizeImage = parseSizeImage(size);
    try {
