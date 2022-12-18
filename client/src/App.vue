@@ -1,61 +1,57 @@
-<template>
+  <template>
   <main class="bg-teal-500 w-screen">
-    <div
-      class="
-        h-screen</main>
-        flex flex-col
-        items-center
-        justify-center
-        mx-auto
-        content-center
-      "
-    >
-      <Textarea v-model="form.description"></Textarea>
-      <select v-model="size">
-        <option v-for="size in sizes" :key="size.value" :value="size.value">
-          {{ size.text }}
-        </option>
-      </select>
-      {{ form }}
-      <div
-        class="
-          my-2
-          border-2
-          self-center
-          rounded-lg
-          overflow-clip
-          shadow-lg
-          hover:shadow-none
-          transition-all
-          ease-in-out
-          duration-300
-          hover:translate-y-2
-        "
-      >
-        <!-- make skleton  -->
+    <div class="h-screen flex flex-row items-center justify-start mx-auto">
+      <div class="">
+        <div class="bg-gray-200 h-screen flex flex-col p-5 w-96">
+          <Textarea v-model="form.description"></Textarea>
 
-        <img :src="defaultImg" />
+          <select v-model="size">
+            <option v-for="size in sizes" :key="size.value" :value="size.value">
+              {{ size.text }}
+            </option>
+          </select>
+          <button
+            class="
+              bg-blue-500
+              hover:bg-blue-700
+              text-white
+              font-bold
+              py-2
+              px-4
+              rounded
+            "
+            @click="generateImage"
+          >
+            Generate
+          </button>
+        </div>
       </div>
-      <div class="my-2">
-        <button
+
+      <div class="flex justify-center h-screen w-full overflow-y-scroll">
+        <div
           class="
-            bg-blue-500
-            hover:bg-blue-700
-            text-white
-            font-bold
-            py-2
-            px-4
-            rounded
+            my-2
+            border-2
+            self-center
+            rounded-lg
+            overflow-clip
+            shadow-lg
+            hover:shadow-none
+            transition-all
+            ease-in-out
+            duration-300
+            hover:translate-y-2
           "
-          @click="generateImage"
+          :style="sizeStyle"
         >
-          Generate
-        </button>
+          <!-- make skleton  -->
+          <img :src="defaultImg" />
+        </div>
       </div>
     </div>
   </main>
 </template>
-<script>
+  <script>
 import Auth from "./modules/auth/Auth.vue";
 import defaultImg from "../src/assets/bg-anime.png";
 import axios from "axios";
@@ -91,7 +87,7 @@ export default {
             ? "256px"
             : this.size === "medium"
             ? "512px"
-            : "1024px",
+            : "712px",
       };
     },
   },
@@ -121,7 +117,7 @@ export default {
   },
 };
 </script>
-<style >
+  <style >
 .resize-y-0 {
   resize: vertical;
   min-height: 0;
