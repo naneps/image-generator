@@ -13,34 +13,33 @@
     "
   >
     <span class="font-semibold text-sm">{{ label }}</span>
-    
   </button>
 </template>
 <script>
 export default {
-    name: "Button",
-    props: {
-        label: {
-            type: String,
-            default: 'label'
-        },
-        placeholder: {
-            type: String,
-            default: ''
-        },
-        type: {
-            type: String,
-            default: 'button'
-        },
-        name: {
-            type: String,
-            default: ''
-        },
-        showLabel: {
-            type: Boolean,
-            default: true
-        }
-    }
+  name: "Button",
+  props: {
+    label: {
+      type: String,
+      default: "label",
+    },
+    placeholder: {
+      type: String,
+      default: "",
+    },
+    type: {
+      type: String,
+      default: "button",
+    },
+    name: {
+      type: String,
+      default: "",
+    },
+    showLabel: {
+      type: Boolean,
+      default: true,
+    },
+  },
 };
 </script>
 <style >

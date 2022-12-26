@@ -1,4 +1,7 @@
-const {Configuration , OpenAIApi} = require('openai');
+const {
+    Configuration,
+    OpenAIApi
+} = require('openai');
 const config = new Configuration({
     apiKey: process.env.API_KEY
 });
@@ -8,33 +11,37 @@ const AI = new OpenAIApi(config);
 const generateImage = async (req, res) => {
     console.log('generateImage')
     console.log(req.body)
-    const {prompt, size} = req.body;
-    const sizeImage = parseSizeImage(size);
-   try {
-    const response = await AI.createImage({
+    const {
         prompt,
-        n: 1,
-        size: sizeImage,
-    })
-    const imageUrl = response.data.data[0].url;
-    res.status(200).json({
-        status: true,
-        data: imageUrl
-    })
-   }catch (error) {
+        size
+    } = req.body;
+    const sizeImage = parseSizeImage(size);
+
+    try {
+        const response = await AI.createImage({
+            prompt,
+            n: 1,
+            size: sizeImage,
+        })
+        const imageUrl = response.data.data[0].url;
+        res.status(200).json({
+            status: true,
+            data: imageUrl
+        })
+    } catch (error) {
         // make like documentations in openai
-        if(error.response){
+        if (error.response) {
             console.log(error.response.status)
             console.log(error.response.data)
-        }else {
+        } else {
             console.log(error.message)
         }
         res.status(400).json({
             status: false,
             message: error.message
-            
+
         })
-   }
+    }
 }
 
 const parseSizeImage = (size) => {
@@ -50,4 +57,6 @@ const parseSizeImage = (size) => {
     }
 }
 
-module.exports = { generateImage }
+module.exports = {
+    generateImage
+}
