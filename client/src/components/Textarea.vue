@@ -1,6 +1,13 @@
 <template>
   <textarea
-    class="transition-all ease-in-out duration-300"
+    class="
+      transition-all
+      ease-in-out
+      duration-300
+      border-2 border-gray-400
+      p-1
+      focus:border-teal-400 focus:outline-none
+    "
     :style="computedStyles"
     v-model="val"
     @focus="resize"
